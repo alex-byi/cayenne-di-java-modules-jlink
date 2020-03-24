@@ -8,8 +8,8 @@ Demo Cayenne Dependency Injection with java 9+ modules and jlink packager.
 # Build the Demo
 Here is how to build it:
 ```
-git clone **************************
-cd *********************************
+git clone https://github.com/alex-byi/cayenne-di-java-modules-jlink.git
+cd cayenne-di-java-modules-jlink/
 mvn package
 ```
 In command line you can see:
