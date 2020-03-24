@@ -16,11 +16,12 @@ In command line you can see:
 ```
 ...
 [INFO] The following dependencies will be linked into the runtime image:
-[INFO]  -> module: cayenneDI ( /cayenneDI_modules/cayenne-di/target/cayenne-di-1.0-SNAPSHOT.jar )
-[INFO]  -> module: mainModule ( /cayenneDI_modules/mainModule/target/mainModule-1.0-SNAPSHOT.jar )
-[INFO]  -> module: firstModule ( /cayenneDI_modules/firstModule/target/firstModule-1.0-SNAPSHOT.jar )
-[INFO]  -> module: secondModule ( /cayenneDI_modules/secondModule/target/secondModule-1.0-SNAPSHOT.jar )
+[INFO]  -> module: org.example.apache.cayenne.module.main ( /cayenneDI_modules/main-module/target/main-module-1.0-SNAPSHOT.jar )
+[INFO]  -> module: org.apache.cayenne.di ( /cayenneDI_modules/cayenne-di/target/cayenne-di-1.0-SNAPSHOT.jar )
+[INFO]  -> module: org.example.apache.cayenne.module.first ( /cayenneDI_modules/first-module/target/first-module-1.0-SNAPSHOT.jar )
+[INFO]  -> module: org.example.apache.cayenne.module.second ( /cayenneDI_modules/second-module/target/second-module-1.0-SNAPSHOT.jar )
 [INFO] Building zip: /cayenneDI_modules/jlink/target/jlink-1.0-SNAPSHOT.zip
+
 
 ...
 [INFO] ------------------------------------------------------------------------
@@ -32,12 +33,12 @@ After that  the maven-jlink-plugin package all java modules, all required depend
 into zip archive. 
 After unpacking archive you can run the Main class of the application using the command:
 ```
-*path to bin folder from archive*/java --module mainModule/org.example.apache.cayenne.Main
+*path to bin folder from archive*/java --module org.example.apache.cayenne.module.main/org.example.apache.cayenne.Main
 ```
 In output you can see 
 ```
-First Module work!!!
-Second Module work!!!
+First module message
+Second module message
 ```
 
 # Important
@@ -52,21 +53,21 @@ open module someModuleName {
 * Using the interfaces of one module to implement them in another module do not forget to use
 "provides … with" and "uses". e.g.:
 ```
-module moduleName {
-    requires otherModule;
+module org.example.module.first {
+    requires org.example.module.other;
 
-    provides otherModule.org.example.ModuleProvider with moduleName.ModuleProvider;
+    provides org.example.module.other.package.ModuleProvider with org.example.module.first.package.ModuleProvider;
 }
 ```
 ```
-module otherModule {
+module org.example.module.other {
 ...
-    uses org.example.ModuleProvider;
+    uses org.example.module.other.package.ModuleProvider;
 }
 ```
 * If you get next error:
 ```
-java.lang.reflect.InaccessibleObjectException: Unable to make public org.example.SomeClass() accessible: module someModule does not "exports org.example" to module otherModule
+java.lang.reflect.InaccessibleObjectException: Unable to make public org.example.SomeClass() accessible: module org.example.module does not "exports package.example" to module org.example.module.other
 ```
 You need to 
 
@@ -78,7 +79,7 @@ or
 
 - use command line argument 
 ```
---add-opens <module>/<package>=<target-module>(,<target-module>)*
+java --add-opens <module>/<package>=<target-module>(,<target-module>)*
 ```
 For example 
 ```

@@ -1,4 +1,4 @@
-module cayenneDI {
+module org.apache.cayenne.di {
     exports org.apache.cayenne.di;
     exports org.apache.cayenne.di.spi;
 
