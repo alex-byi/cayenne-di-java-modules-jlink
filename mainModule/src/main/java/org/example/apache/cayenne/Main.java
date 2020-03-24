@@ -14,19 +14,14 @@ public class Main {
     public static void main(String[] args) {
 
         ModuleLoader loader = new ModuleLoader();
-
         Injector injector = DIBootstrap.createInjector(loader.load(ModuleProvider.class));
 
         FirstModuleProvider firstModuleProviderInstance = injector.getInstance(FirstModuleProvider.class);
-
         FirstModule firstModule = (FirstModule) firstModuleProviderInstance.module();
-
         firstModule.printStr();
 
         SecondModuleProvider secondModuleProviderInstance = injector.getInstance(SecondModuleProvider.class);
-
         SecondModule secondModule = (SecondModule) secondModuleProviderInstance.module();
-
         secondModule.printStr();
 
     }

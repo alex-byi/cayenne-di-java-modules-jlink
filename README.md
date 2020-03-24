@@ -43,7 +43,7 @@ Second Module work!!!
 #Important
 * If your project has circular dependencies you cannot build it using Java modules and jlink
 * If any module uses tests that use Java Reflection to access the packages of another module,
- then you will have to make the module completely open by adding the "open" keyword to the module info file. e.g.:
+ then you will have to make the module completely open by adding the "open" keyword to the module-info file. e.g.:
  ```
 open module someModuleName {
 ...
@@ -64,3 +64,16 @@ module otherModule {
     uses org.example.ModuleProvider;
 }
 ```
+* If you get next error:
+```
+java.lang.reflect.InaccessibleObjectException: Unable to make public org.example.SomeClass() accessible: module someModule does not "exports org.example" to module otherModule
+```
+You need to 
+
+>open this module to other module(s) by using "open" keyword in module-info file
+
+or
+
+>use command line argument "--add-opens <module>/<package>=<target-module>(,<target-module>)*
+>>For example 
+>>--add-opens java.management/sun.management=ALL-UNNAMED
