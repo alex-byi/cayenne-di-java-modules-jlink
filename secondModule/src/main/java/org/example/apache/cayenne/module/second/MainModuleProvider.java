@@ -1,4 +1,4 @@
-package org.apache.cayenne.module.second;
+package org.example.apache.cayenne.module.second;
 
 import org.apache.cayenne.di.Module;
 

@@ -1,13 +1,13 @@
-package org.apache.cayenne;
+package org.example.apache.cayenne;
 
 import org.apache.cayenne.di.DIBootstrap;
 import org.apache.cayenne.di.Injector;
 import org.apache.cayenne.di.spi.ModuleLoader;
 import org.apache.cayenne.di.spi.ModuleProvider;
-import org.apache.cayenne.module.first.FirstModule;
-import org.apache.cayenne.module.first.FirstModuleProvider;
-import org.apache.cayenne.module.second.SecondModule;
-import org.apache.cayenne.module.second.SecondModuleProvider;
+import org.example.apache.cayenne.module.second.SecondModule;
+import org.example.apache.cayenne.module.second.SecondModuleProvider;
+import org.example.apache.cayenne.module.first.FirstModule;
+import org.example.apache.cayenne.module.first.FirstModuleProvider;
 
 public class Main {
 

@@ -1,7 +1,9 @@
+import org.example.apache.cayenne.module.second.MainModuleProvider;
+
 module secondModule {
     requires cayenneDI;
 
-    exports org.apache.cayenne.module.second to cayenneDI, main;
+    exports org.example.apache.cayenne.module.second to cayenneDI, mainModule;
 
-    provides org.apache.cayenne.di.spi.ModuleProvider with org.apache.cayenne.module.second.MainModuleProvider;
+    provides org.apache.cayenne.di.spi.ModuleProvider with MainModuleProvider;
 }

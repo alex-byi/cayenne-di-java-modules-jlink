@@ -17,7 +17,7 @@
         <module>cayenne-di</module>
         <module>firstModule</module>
         <module>secondModule</module>
-        <module>main</module>
+        <module>mainModule</module>
         <module>jlink</module>
     </modules>
 
