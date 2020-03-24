@@ -6,7 +6,7 @@ import org.apache.cayenne.di.spi.ModuleProvider;
 import java.util.Collection;
 import java.util.Collections;
 
-public class MainModuleProvider implements ModuleProvider {
+public class SecondModuleProvider implements ModuleProvider {
 
     @Override
     public Module module() {
