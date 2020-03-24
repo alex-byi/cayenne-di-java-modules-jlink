@@ -70,10 +70,17 @@ java.lang.reflect.InaccessibleObjectException: Unable to make public org.example
 ```
 You need to 
 
->open this module to other module(s) by using "open" keyword in module-info file
-
+- open this module to other module(s) by using:
+```
+ "open" keyword in module-info file
+```
 or
 
->use command line argument "--add-opens <module>/<package>=<target-module>(,<target-module>)*
->>For example 
->>--add-opens java.management/sun.management=ALL-UNNAMED
+- use command line argument 
+```
+--add-opens <module>/<package>=<target-module>(,<target-module>)*
+```
+For example 
+```
+--add-opens java.management/sun.management=ALL-UNNAMED
+```
