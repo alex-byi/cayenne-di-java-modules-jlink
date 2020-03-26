@@ -46,9 +46,19 @@ Second module message
 * If any module uses tests that use Java Reflection to access the packages of another module,
  then you will have to make the module completely open by adding the "open" keyword to the module-info file. e.g.:
  ```
-open module someModuleName {
+open module org.example.some.module {
 ...
 }
+```
+or configure the maven plugin to open a specific package for another module e.g.:
+```
+<plugin>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>${surefire-version}</version>
+    <configuration>
+    <argLine>--add-opens org.example.some.module/org.example.module.testpackage=org.example.another.module</argLine>
+    </configuration>
+</plugin>
 ```
 * Using the interfaces of one module to implement them in another module do not forget to use
 "provides … with" and "uses". e.g.:
@@ -85,3 +95,12 @@ For example
 ```
 --add-opens java.management/sun.management=ALL-UNNAMED
 ```
+or configure maven plugin(s)
+* Maven JLink Plugin cannot be used with automatic modules
+
+* If you get next error
+```
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-jlink-plugin:3.0.0-alpha-1:jlink (default-jlink) on project : Execution default-jlink of goal org.apache.maven.plugins:maven-jlink-plugin:3.0.0-alpha-1:jlink failed.: NullPointerException
+```
+You can wait for the release of the new version of the plugin, or use the snapshot version
+

@@ -6,4 +6,9 @@ public class FirstImpl implements FirstInterface {
     public void printMessage() {
         System.out.println("First module message");
     }
+
+    @Override
+    public String someString() {
+        return "First module message";
+    }
 }

@@ -21,6 +21,17 @@
         <module>jlink</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -36,6 +47,13 @@
                 <configuration>
                     <source>9</source>
                     <target>9</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <argLine>--add-opens org.example.apache.cayenne.module.second/org.example.apache.cayenne.module.testpackage=org.apache.cayenne.di</argLine>
                 </configuration>
             </plugin>
         </plugins>
