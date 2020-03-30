@@ -104,3 +104,41 @@ or configure maven plugin(s)
 ```
 You can wait for the release of the new version of the plugin, or use the snapshot version
 
+* If you get next error
+```
+Error: automatic module cannot be used with jlink:
+```
+This means that you need to create a modular jar. file. First, you can use jdeps for create module-info.java:
+```
+jdeps --generate-module-info <output-location> <path-to-jar>
+```
+Next, you need to compile module-info.java:
+```
+javac module-info.java
+```
+Next, you need to add module-info.class to non-modular .jar:
+```
+jar --update --file <path-to-jar> --main-class <path.to.Main> --module-version <version> -C <DIR> <path-to-module-info.class>
+```
+Next, install jar into local maven repository:
+```
+mvn install:install-file -Dfile=<path-to-jar> -DgroupId=<group.id> -DartifactId=<artifact.id> -Dversion=<version> -Dpackaging=jar
+```
+Next, add dependency in pom.xml:
+```
+<dependency>
+    <groupId>org.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+Next, add configuration in maven-compiler-plugin:
+```
+<configuration>
+    <compilerArgs>
+        <arg>--add-exports</arg> <arg>org.example/example.package=<module.that.needs.dependencies></arg>
+    </compilerArgs>
+</configuration>
+```
+And after that maven-jlink-plugin compile .zip archive with all modules include .jar
+
